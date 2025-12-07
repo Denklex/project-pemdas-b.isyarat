@@ -3,7 +3,6 @@ import time
 import math
 import mediapipe as mp
 
-
 # DETEKSI TANGAN
 
 class HandDetector:
@@ -26,7 +25,6 @@ class HandDetector:
         if draw and self.results.multi_hand_landmarks:
             for hand in self.results.multi_hand_landmarks:
                 self.mpDraw.draw_landmarks(img, hand, self.mpHands.HAND_CONNECTIONS)
-
         return img
 
     def findPositions(self, img, draw=False):
@@ -43,29 +41,23 @@ class HandDetector:
                     if draw:
                         cv2.circle(img, (cx, cy), 5, (0, 255, 0), -1)
                 handsLM.append(lmList)
-
         return handsLM
-
 
 # FUNGSI GESTUR TANGAN
 
 def dist(a, b):
     return math.dist((a[1], a[2]), (b[1], b[2]))
 
-
 def finger_state(lm):
     """menentukan buka/tutup jari"""
     result = []
-
     # jempol
     result.append(1 if lm[4][1] > lm[3][1] else 0)
-
     # 4 jari
     for tip, pip in [(8, 6), (12, 10), (16, 14), (20, 18)]:
         result.append(1 if lm[tip][2] < lm[pip][2] else 0)
 
     return result
-
 
 def distances_dict(lm):
     d = {}
@@ -74,7 +66,6 @@ def distances_dict(lm):
             if i != j:
                 d[(i, j)] = dist(lm[i], lm[j])
     return d
-
 
 def gesture_one_hand(lm):
     f = finger_state(lm)
@@ -107,7 +98,6 @@ def gesture_one_hand(lm):
 
     return None
 
-
 def gesture_two_hands(l1, l2):
     f1, f2 = finger_state(l1), finger_state(l2)
 
@@ -115,7 +105,6 @@ def gesture_two_hands(l1, l2):
         return "Bagus"
 
     return None
-
 
 # MAIN
 
@@ -158,7 +147,6 @@ def main():
 
     cap.release()
     cv2.destroyAllWindows()
-
-
+    
 if __name__ == "__main__":
     main()
