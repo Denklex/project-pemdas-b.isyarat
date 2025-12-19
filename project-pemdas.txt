@@ -1,2 +1,3 @@
-git ini buat project pemdas
-cek commmit 2
+PETUNJUK
+-sebelum menjalankan program pastikan sudah menginstall mediapipe dan opencv
+-versi python juga disesuaikan versinya agar cocok dengan versi gesture mediapipe
