@@ -1,2 +1,2 @@
 # project-pemdas-b.isyarat
-repo buat project pemdas
+repo for sign language learning apps
